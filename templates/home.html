@@ -17,21 +17,16 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div>
-      <div class="container-fluid">
+      
         {% csrf_token %}
-        <h1 class="navbar-brand">Recipe Website</h1>
-      </div>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-          {% csrf_token %}
-          <a href="{% url 'create' %}" class="btn btn-primary navbar-brand">Create New</a>  
-        </div>
-        <div class="container-fluid">
-          {% csrf_token %}
-          <a href="{% url 'logout' %}" class="btn btn-primary navbar-brand">Logout</a>  
-        </div>
-      </div>
+        <h1 class="navbar-brand" style="font-size:50px;">Recipe Website</h1>
+        
+        {% csrf_token %}
+        <a href="{% url 'create' %}" class="btn btn-primary navbar-brand" style="margin-left:50vw;">Create New</a>  
+        
+        {% csrf_token %}
+        <a href="{% url 'logout' %}" class="btn btn-primary navbar-brand">Logout</a>  
+
     </nav>
 
     
@@ -46,16 +41,19 @@
               <p class="lead font-italic">{{n.Detail}}</p>
               <hr class="my-4">
               <span > {{n.Date}}
-               
+                <a href="{% url 'update' n.id %}" class="btn text-secondary px-0">
+                  <h3 style="padding-left:200px">Edit</h3>
+                </a>
+                <form action="{% url 'delete' n.id %}" method="post" class="d-inline">
+                  {% csrf_token %}
+                  <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                  <button type="submit" class="btn" style="padding-left:100px;">
+                    Delete</button> 
           </div>
       </div>
     </div>
-  
 
     {% endfor %}
-
-  
-
 
   </body>
 

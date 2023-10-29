@@ -50,13 +50,28 @@ def LogoutPage(request):
     logout(request)
     return redirect('login')  
 
-def CreatePage(request):
+def CreatePage(request,id=0):
     if request.method == "GET":
-        form = Createrecipe()
+        if id==0:
+            form = Createrecipe()
+        else:
+            recipe=CreateRecipe.objects.get(pk=id)
+            form = Createrecipe(instance=recipe)    
         return render(request, 'create.html', {'form':form})
-    else:
-        form = Createrecipe(request.POST)
+    else: 
+        if id==0:
+            form = Createrecipe(request.POST)
+        else:
+            recipe=CreateRecipe.objects.get(pk=id)
+            form = CreateRecipe(request.POST,instance=recipe)
+
         if form.is_valid():
             form.save()
         return redirect('home')
+    
+
+def Deleterecipe(request,id):
+    recipe = CreateRecipe.objects.get(pk=id)
+    recipe.delete()
+    return redirect('home')
          

@@ -23,7 +23,8 @@ urlpatterns = [
     path('',views.SignupPage,name='signup'),
     path('login/',views.LoginPage,name='login'),
     path('home/',views.HomePage,name='home'),
+    path('home/<int:id>/',views.CreatePage,name='update'),
     path('logout/',views.LogoutPage,name='logout'),
     path('create/', views.CreatePage, name = 'create'),
-
+    path('delete/<int:id>/', views.Deleterecipe, name = 'delete')
 ]
