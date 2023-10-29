@@ -1,4 +1,6 @@
+
 <!DOCTYPE html>
+{% load crispy_forms_tags %}
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -17,6 +19,7 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div>
       <div class="container-fluid">
         {% csrf_token %}
         <h1 class="navbar-brand">Recipe Website</h1>
@@ -24,13 +27,32 @@
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
           {% csrf_token %}
-          <a href="{% url 'create' %}" class="btn btn-primary navbar-brand">Create New</a>  
+          <a href="{% url 'create' %}" class="btn btn-primary navbar-brand">Create Another </a>  
         </div>
         <div class="container-fluid">
           {% csrf_token %}
           <a href="{% url 'logout' %}" class="btn btn-primary navbar-brand">Logout</a>  
         </div>
+    </div>
     </nav>
 
+    <div class="container">
+        <div class="col-md-10 offset-md-1 mt-5">
+            <div class="jumbotron">
+                <h1 class="display-4">Create Recipe</h1>
+                <p class="lead font-italic">Here you can Create your New Recipe !!!!</p>
+                <hr class="my-4">
+                <form action="" method="post" autocomplete="off" style="display:flex; flex-direction:column;">
+                    {% csrf_token %}
+
+                {{form}}
+                <br>
+                <input type="submit" value="ADD" class="btn btn-primary navbar-brand"> 
+                </form>
+            </div>
+        </div>
+    </div>
+
   </body>
+  
 </html>

@@ -2,6 +2,8 @@ from django.shortcuts import render,HttpResponse,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from .forms import Createrecipe
 # Create your views here.
 
 @login_required(login_url='login')
@@ -16,7 +18,9 @@ def SignupPage(request):
         pass2=request.POST.get('password2')
         
         if pass1!=pass2:
-            return HttpResponse("Your password and consent password are not same !!!")
+            messages.success(request, ('Your password and consent password are not same !!!'))
+            return redirect('signup')
+           
         my_user=User.objects.create_user(uname,email,pass1)
         my_user.save()
         return redirect('login')
@@ -40,4 +44,8 @@ def LoginPage(request):
 
 def LogoutPage(request):
     logout(request)
-    return redirect('login')   
+    return redirect('login')  
+
+def CreatePage(request):
+    form = Createrecipe
+    return render(request, 'create.html', {'form':form}) 
