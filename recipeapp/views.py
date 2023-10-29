@@ -4,11 +4,15 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import Createrecipe
+from .models import CreateRecipe
 # Create your views here.
 
 @login_required(login_url='login')
 def HomePage(request):
-    return render(request, 'home.html',{})
+    recipedata = CreateRecipe.objects.all()
+    data = {'recipedata':recipedata}
+
+    return render(request, 'home.html',data)
 
 def SignupPage(request):
     if request.method == 'POST':
@@ -47,5 +51,12 @@ def LogoutPage(request):
     return redirect('login')  
 
 def CreatePage(request):
-    form = Createrecipe
-    return render(request, 'create.html', {'form':form}) 
+    if request.method == "GET":
+        form = Createrecipe()
+        return render(request, 'create.html', {'form':form})
+    else:
+        form = Createrecipe(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('home')
+         

@@ -6,7 +6,7 @@ from . import views
 urlpatterns = [
     
     # path('', views.SignupPage, name = 'signup'),
-    # path('login/', views.LoginPage, name = 'login'),
+   # path('/', views.LoginPage, name = 'login'),
     
 
 ]

@@ -5,4 +5,4 @@ from django.db import models
 class CreateRecipe(models.Model):
     Name = models.CharField(max_length=60)
     Detail = models.TextField(max_length=500)
-    Date = models.DateTimeField(null=True)
+    Date = models.DateField(null=True)
