@@ -23,8 +23,10 @@ urlpatterns = [
     path('',views.SignupPage,name='signup'),
     path('login/',views.LoginPage,name='login'),
     path('home/',views.HomePage,name='home'),
-    path('home/<int:id>/',views.CreatePage,name='update'),
+    # path('home/<int:id>/',views.CreatePage,name='update'),
     path('logout/',views.LogoutPage,name='logout'),
     path('create/', views.CreatePage, name = 'create'),
-    path('delete/<int:id>/', views.Deleterecipe, name = 'delete')
+    path('<int:pk>/delete', views.Deleterecipe, name = 'delete'),
+    path('<int:pk>/update', views.Updaterecipe, name = 'update')
 ]
+

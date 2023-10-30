@@ -65,13 +65,26 @@ def CreatePage(request,id=0):
             recipe=CreateRecipe.objects.get(pk=id)
             form = CreateRecipe(request.POST,instance=recipe)
 
-        if form.is_valid():
-            form.save()
-        return redirect('home')
+    if form.is_valid():
+        form.save()
+    return redirect('home')
     
 
-def Deleterecipe(request,id):
+def Deleterecipe(request,pk):
     recipe = CreateRecipe.objects.get(pk=id)
     recipe.delete()
     return redirect('home')
+
+
+def Updaterecipe(request,pk):
+    if id==0:
+            form = Createrecipe(request.PUT)
+    else:
+        recipe=CreateRecipe.objects.get(pk=id)
+        form = CreateRecipe(request.PUT,instance=recipe)
+    if form.is_valid():
+        form.save()
+    return render(request, 'update.html', {'form':form})
+    
+
          
