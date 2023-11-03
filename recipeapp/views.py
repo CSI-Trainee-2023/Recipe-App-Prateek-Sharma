@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponse,redirect
+from django.shortcuts import render,HttpResponseRedirect,redirect,HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
@@ -52,39 +52,36 @@ def LogoutPage(request):
 
 def CreatePage(request,id=0):
     if request.method == "GET":
-        if id==0:
-            form = Createrecipe()
-        else:
-            recipe=CreateRecipe.objects.get(pk=id)
-            form = Createrecipe(instance=recipe)    
+        form = Createrecipe()
         return render(request, 'create.html', {'form':form})
     else: 
-        if id==0:
-            form = Createrecipe(request.POST)
-        else:
-            recipe=CreateRecipe.objects.get(pk=id)
-            form = CreateRecipe(request.POST,instance=recipe)
-
+        form = Createrecipe(request.POST)
     if form.is_valid():
         form.save()
     return redirect('home')
     
 
 def Deleterecipe(request,pk):
-    recipe = CreateRecipe.objects.get(pk=id)
+    
+    recipe = CreateRecipe.objects.get(pk=pk)
     recipe.delete()
     return redirect('home')
 
 
 def Updaterecipe(request,pk):
-    if id==0:
-            form = Createrecipe(request.PUT)
-    else:
-        recipe=CreateRecipe.objects.get(pk=id)
-        form = CreateRecipe(request.PUT,instance=recipe)
+    if request.method == "GET":
+        recipe=CreateRecipe.objects.get(pk=pk)
+        form = Createrecipe(instance=recipe)    
+           
+    if request.method=="POST":
+        recipe=CreateRecipe.objects.get(pk=pk)
+        form = Createrecipe(request.POST,instance=recipe)
+
     if form.is_valid():
         form.save()
-    return render(request, 'update.html', {'form':form})
+        return redirect('home')
+    return render(request, 'update.html', {'form': form})
+    
     
 
          

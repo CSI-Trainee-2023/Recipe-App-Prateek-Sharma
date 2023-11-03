@@ -27,6 +27,6 @@ urlpatterns = [
     path('logout/',views.LogoutPage,name='logout'),
     path('create/', views.CreatePage, name = 'create'),
     path('<int:pk>/delete', views.Deleterecipe, name = 'delete'),
-    path('<int:pk>/update', views.Updaterecipe, name = 'update')
+    path('recipe/', include("recipeapp.urls"))
 ]
 

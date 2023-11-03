@@ -7,6 +7,7 @@ urlpatterns = [
     
     # path('', views.SignupPage, name = 'signup'),
    # path('/', views.LoginPage, name = 'login'),
+   path('update/<int:pk>', views.Updaterecipe, name = 'update')
     
 
 ]
